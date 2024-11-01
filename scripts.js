@@ -78,3 +78,68 @@ const createBook = ({ id, title, author, image, description, published, genres }
     return book // Returns the newly created Book object
 }
 
+
+// BookList Object for managing collection of books and methods
+
+const createBookList = (booksData, booksPerPage) => {
+    /**
+     * Creates a new BookList instance
+     * @param {Array} books - Array of raw book data
+     * @param {number} booksPerPage - Number of books to display per page
+     */
+    const bookList = {
+        // convert raw book data into book instances
+        books: booksData.map(createBook),
+        booksPerPage, // Store books per page setting
+        // Initialize current page to 1
+        currentPage: 1,
+        // all books are matches initially
+        matches: booksData.map(createBook),
+
+        /**
+         * Resets to the first page and returns the filtered matches.
+         * @param {Object} filters - Search includea the title, author, or genre
+         * @returns {Array<Object>} An array of books that match the specified filters
+         */
+        search(filters) {
+            this.matches = this.books.filer(book => book.matches(filters))
+            this.currentPage = 1
+            return this.matches
+        },
+
+        /**
+         * gets books for the current page based on 'booksPerPage'.
+         * This method slices the 'matches' array to return  books for the current page
+         * @returns {Array<Object>} An array of books for the current page
+         */
+        getCurrentBookPage() {
+             // Calculate the start and end indexes for slicing 'matches'
+            const start = (this.currentPage -1) * this.booksPerPage
+            const end = start + this.booksPerpage
+            return this.matches.slice(start, end)
+        },
+
+        /**
+         * Calculates the number of books remaining after the current page
+         * @returns {number} The count of remaining books after the current page
+         */
+        remainingCount() {
+            // Calculate remaining books by subtracting books shown from total matches
+            return Math.max(0, this.matches.length - (this.currentPage * this.booksPerPage))
+        },
+
+        /**
+         * goes to the next page of results if additional books are available.
+         * @returns {boolean} true if the page goes successfully, false if no more pages are available
+         */
+        nextPage() {
+             // move to the next page only if there are remaining books to display
+            if (this.remainingCount() > 0) {
+                this.currentPage++
+                return true
+            }
+            return false
+        }
+    }
+    return bookList // returns the bookList object
+}
