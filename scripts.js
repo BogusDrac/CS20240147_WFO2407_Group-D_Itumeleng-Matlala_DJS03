@@ -79,13 +79,18 @@ const createBook = ({ id, title, author, image, description, published, genres }
 }
 
 
+
+
+
 // BookList Object for managing collection of books and methods
+
 
 const createBookList = (booksData, booksPerPage) => {
     /**
      * Creates a new BookList instance
      * @param {Array} books - Array of raw book data
      * @param {number} booksPerPage - Number of books to display per page
+     * @returns {Object} A booklist object with methods to filter, navigate and retrieve books
      */
     const bookList = {
         // convert raw book data into book instances
