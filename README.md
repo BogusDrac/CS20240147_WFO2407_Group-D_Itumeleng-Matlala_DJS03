@@ -15,7 +15,7 @@ The "Book Connect" project provides an opportunity for students to refine a full
 
 #### Tasks
 
-1. **Code Analysis**: Start by understanding the current implementation of the "Book Connect" application, including its HTML structure and JavaScript functionality.
+1. **Code Analysis**: Start by understanding the current i mplementation of the "Book Connect" application, including its HTML structure and JavaScript functionality.
 2. **Plan Refactoring**: Identify sections of the code that can be made more abstract and modular. Look for patterns and repetitive code that can be simplified.
 3. **Implement Abstraction**:
    - **Objects**: Define objects to represent key elements of the application, such as books, authors, and genres. Utilise the provided data (e.g., `authors`, `genres`, `books`) to populate these objects.
